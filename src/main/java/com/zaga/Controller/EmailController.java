@@ -27,7 +27,28 @@ public class EmailController {
     ProducerTemplate producerTemplate;
 
     @POST
-    @Path("/sendEmail")
+    @Path("/sendEmailWithoutAttachment")
+    public Response sendMailWithoutAttachment(@QueryParam("to") String to, @QueryParam("from") String from,
+            @QueryParam("subject") String subject, @QueryParam("body") String body,
+            @QueryParam("fileName") String fileName)
+            throws Exception {
+
+        // Create the message headers
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("To", to);
+        headers.put("From", from);
+        headers.put("Subject", subject);
+
+        try {
+            producerTemplate.sendBodyAndHeaders("direct:sendMailWithoutAttachment", body, headers);
+            return Response.ok("Email sent successfully").build();
+        } catch (Exception e) {
+            return Response.ok("Failed to send email").build();
+        }
+    }
+
+    @POST
+    @Path("/sendEmailWithAttachment")
     @Consumes("application/octet-stream")
     public Response sendMail(@QueryParam("to") String to, @QueryParam("from") String from,
             @QueryParam("subject") String subject, @QueryParam("body") String body,

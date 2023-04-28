@@ -55,5 +55,14 @@ public class CamelMailServiceImpl extends RouteBuilder {
                         .to("{{mail.smtp.url}}")
                         .log("Email sent successfully")
                         .end();
+
+            from("direct:sendMailWithoutAttachment")
+                        .log("I'm in")
+                        .setHeader(MailConstants.MAIL_TO, header("To"))
+                        .setHeader(MailConstants.MAIL_SUBJECT, header("Subject"))
+                        .setBody(body())
+                        .to("{{mail.smtp.url}}")
+                        .log("Email sent successfully")
+                        .end();
       }
 }
