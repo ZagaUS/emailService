@@ -29,8 +29,7 @@ public class EmailController {
     @POST
     @Path("/sendEmailWithoutAttachment")
     public Response sendMailWithoutAttachment(@QueryParam("to") String to, @QueryParam("from") String from,
-            @QueryParam("subject") String subject, @QueryParam("body") String body,
-            @QueryParam("fileName") String fileName)
+            @QueryParam("subject") String subject, @QueryParam("body") String body)
             throws Exception {
 
         // Create the message headers
