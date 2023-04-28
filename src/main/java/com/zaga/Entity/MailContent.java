@@ -6,9 +6,27 @@ public class MailContent {
    private String from;
    private String to;
    private String body;
+   private byte[] fileData;
+   private String fileName;
 
    public String getSubject() {
       return subject;
+   }
+
+   public byte[] getFileData() {
+      return fileData;
+   }
+
+   public void setFileData(byte[] fileData) {
+      this.fileData = fileData;
+   }
+
+   public String getFileName() {
+      return fileName;
+   }
+
+   public void setFileName(String fileName) {
+      this.fileName = fileName;
    }
 
    public void setSubject(String subject) {
@@ -42,16 +60,19 @@ public class MailContent {
    public MailContent() {
    }
 
-   public MailContent(String subject, String from, String to, String body) {
+   public MailContent(String subject, String from, String to, String body, byte[] fileData, String fileName) {
       this.subject = subject;
       this.from = from;
       this.to = to;
       this.body = body;
+      this.fileData = fileData;
+      this.fileName = fileName;
    }
 
    @Override
    public String toString() {
-      return "MailContent [subject=" + subject + ", from=" + from + ", to=" + to + ", body=" + body + "]";
+      return "MailContent [subject=" + subject + ", from=" + from + ", to=" + to + ", body=" + body + ", fileData="
+            + fileData + ", fileName=" + fileName + "]";
    }
 
 }
