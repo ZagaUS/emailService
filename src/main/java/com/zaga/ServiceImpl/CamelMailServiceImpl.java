@@ -30,7 +30,7 @@ public class CamelMailServiceImpl extends RouteBuilder {
                         .unmarshal().json(MailContent.class)
                         .process(new KafkaProcessor())
                         .log("I'm in")
-                        .to("smtps://smtp.gmail.com?username=hariduke001@gmail.com&password=jjwkenhimqehxvpz")
+                        .to("{{mail.smtp.url}}")
                         .log("Email sent successfully")
                         .onException(Exception.class)
                         .log("Kafka failed to send email")
@@ -52,7 +52,7 @@ public class CamelMailServiceImpl extends RouteBuilder {
                               att.addHeader("Content-Description", "some sample content");
                               in.addAttachmentObject(fileName, att);
                         })
-                        .to("smtps://smtp.gmail.com?username=hariduke001@gmail.com&password=jjwkenhimqehxvpz")
+                        .to("{{mail.smtp.url}}")
                         .log("Email sent successfully")
                         .end();
       }
