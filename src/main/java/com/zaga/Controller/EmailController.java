@@ -40,7 +40,7 @@ public class EmailController {
 
         try {
             producerTemplate.sendBodyAndHeaders("direct:sendMailWithoutAttachment", body, headers);
-            return Response.ok("Email sent successfully").build();
+            return Response.ok(Response.Status.CREATED).build();
         } catch (Exception e) {
             return Response.ok("Failed to send email").build();
         }
